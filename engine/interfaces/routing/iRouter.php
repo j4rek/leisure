@@ -10,7 +10,7 @@ interface iRouter{
     /**
      * 
      */
-    static function verifyRoute($type, $route);
+    static function verifyRoute(\engine\http\request $request);
     
     /**
      * 

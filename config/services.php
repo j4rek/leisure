@@ -6,6 +6,7 @@ return [
     */
 
     'SERVICES' => [
-        'DB' => ''
+        'DB'        => '',
+        'VIEW'    => 'engine\structure\view::class'
     ]
 ];

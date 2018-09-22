@@ -5,6 +5,6 @@ use \engine\routing\router;
 
 class web extends router{
     function register(){
-        $this->get('make', 'primitive');
+        $this->get('make/{asdas}/pepe', 'primitive');
     }
 }

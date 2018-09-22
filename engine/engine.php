@@ -29,12 +29,12 @@ class engine implements iEngine{
     }
 
     public function startConfiguration(){
-
+        
     }
 
     public function manageRequest(){
-        $this->request = request::process();
-        $this->result = router::verifyRoute($this->request->header('REQUEST_METHOD'), $this->request->header('REQUEST_URI'));
+        $this->request = new request();
+        $this->result = router::verifyRoute($this->request);
     }
     
     public function response(){

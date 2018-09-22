@@ -17,9 +17,3 @@ function ignition($class){
         
     }
 }
-
-# Debug function
-function debug($var){
-    var_dump($var);
-    exit();
-}
