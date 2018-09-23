@@ -15,11 +15,6 @@ class request{
     /**
      * 
      */
-    private $page;
-
-    /**
-     * 
-     */
     private $args;
 
     /**
@@ -28,7 +23,7 @@ class request{
     function __construct(){
         $this->headers = (object) $_SERVER;
         $this->queryArgs = (object) $_REQUEST;
-        $this->setParameters();
+        $this->args = new \stdclass();
     }
 
     /**
@@ -48,13 +43,6 @@ class request{
     /**
      * 
      */
-    function getPage(){
-        return $this->page;
-    }
-
-    /**
-     * 
-     */
     function checkUrlParameters(){
         
     }
@@ -62,13 +50,13 @@ class request{
     /**
      * 
      */
-    function setParameters(){
-        $url = str_replace(str_replace('index.php','', $this->header('PHP_SELF')),'',$this->header('REQUEST_URI'));
-        $params = explode('/',$url);
-        $this->page = array_shift($params);
-        $this->args = new \stdClass();
-        foreach($params as $param){
-            $this->args->value = $param;
+    function setParameters($route){
+        $values = preg_split('/\//', preg_replace('/.+\/(?=' . $route['page'] . ')/', '', $this->header('REQUEST_URI')));
+        $parameters = preg_split('/\//', $route['route']);
+        foreach($parameters as $key => $parameter){
+            if(preg_match('/\{\w+\??\}/', $parameter)){
+                $this->args->{preg_replace('/[\}\{\?]/', '', $parameter)} = $values[$key];
+            }
         }
     }
 
